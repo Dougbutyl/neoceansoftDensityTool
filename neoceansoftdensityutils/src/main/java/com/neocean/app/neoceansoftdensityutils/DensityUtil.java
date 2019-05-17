@@ -45,10 +45,11 @@ public class DensityUtil {
 
     /**
      * view宽高
+     *
      * @param view
      * @param handler
      */
-    public static void getViewMH(final View view, final Handler handler) {
+    public static void getViewMH(final View view, final Handler handler){
         final int[] mWidth = {0};
         final int[] mHeight = new int[1];
         view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -59,7 +60,9 @@ public class DensityUtil {
                 mHeight[0] = view.getHeight();
                 Message message = handler.obtainMessage();
                 message.obj = new Point(mWidth[0], mHeight[0]);
-                handler.sendMessage(message);
+                if (handler != null) {
+                    handler.sendMessage(message);
+                }
             }
         });
 
